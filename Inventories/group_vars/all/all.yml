@@ -19,3 +19,10 @@ esx1_name: "esx01"
 esx1_ip: "192.168.60.11"
 esx2_name: "esx02"
 esx2_ip: "192.168.60.12"
+
+#LDAP Variables
+ldap_root: dc=davis,dc=home
+ldap_admin_username: manager
+ldap_admin_password: VMware1!
+ldap_users: user01,user02
+ldap_passwords: password1,password2
