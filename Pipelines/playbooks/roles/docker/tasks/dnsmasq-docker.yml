@@ -1,0 +1,59 @@
+---
+###############################################################################
+# dnsmasq-docker.yml
+#     create the dnsmasq docker container
+#
+###############################################################################
+
+# first, shutoff the resolved internal DNS
+- name: Stop systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: stopped
+  tags:
+    - dnsmasq
+
+- name: Disable systemd-resolved
+  systemd:
+    name: systemd-resolved
+    enabled: no
+    masked: yes
+  tags:
+    - dnsmasq
+
+- name: Replace line in resolv.conf since internal DNS is disabled
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: '^nameserver 127\.0\.0\.53'
+    line: nameserver 127.0.0.1
+  
+- name: Add additional 8.8.8.8 to resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    insertafter: 'nameserver'
+    line: nameserver 8.8.8.8
+ 
+- name: Copy dnsmasq conf file from Template
+  template:
+    src: dnsmasq.conf
+    dest: /opt/dnsmasq.conf
+
+# Create the DNSmasq containter with port 8080 used for the webserver to modify values
+- name: Create dnsmasq container
+  community.general.docker_container:
+     name: dnsmasq
+     image: jpillora/dnsmasq
+     container_default_behavior: compatibility
+     state: started
+     privileged: yes
+     restart: yes
+     restart_policy: always
+     network_mode: host
+     log_driver: json-file
+     log_options:
+       max-size: 100m
+     volumes:
+       - /opt/dnsmasq.conf:/etc/dnsmasq.conf
+     env:
+       HTTP_USER: "admin"
+       HTTP_PASS: "VMware1!"

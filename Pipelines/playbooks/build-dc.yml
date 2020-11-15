@@ -1,0 +1,12 @@
+---
+- name: Install and Configure Docker Containers for Domain Controller
+  hosts: dc
+  gather_facts: false
+  connection: local
+  become: yes
+  roles: 
+  - docker
+#  - dnsmasq
+#  - ntp
+#  - ldap
+#  - cacert

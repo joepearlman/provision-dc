@@ -1,0 +1,11 @@
+---
+# main tasks file for docker setup
+
+- name: install docker
+  include: docker-install.yml
+  tags: install-docker
+
+- name: Create DNSmasq container
+  include: dnsmasq-docker.yml
+  tags: dnsmasq
+

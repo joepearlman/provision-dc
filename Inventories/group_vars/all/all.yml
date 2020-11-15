@@ -1,0 +1,14 @@
+---
+ansible_python_interpreter: /usr/bin/python3
+
+myuser: gdavis
+
+domain: "davis.home"         # Domain Name to use in your Environment
+net_prefix: "192.168.60"     # Your Network Subnet to use
+subnet: "192.168.60.0"       # Your Network Subnet to use
+submask: "255.255.255.0"     # Your Network Subnet to use
+gateway: "192.168.60.1"      # Gateway to use and Vyos Internal IP
+dns: "192.168.60.9"          # DNS Server for your Internal Network
+global_dns: "8.8.8.8"        # External DNS
+password_common: "VMware1!"  # Password to be shared - feel free to overwrite below
+
