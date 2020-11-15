@@ -1,0 +1,20 @@
+---
+###############################################################################
+# ntp-docker.yml
+#     create the ntp docker container
+#
+###############################################################################
+
+# Create the NTP containter 
+# docker run --name ntpserver -d -p 123:123  --restart always cloudwattfr/ntpserver:latest
+- name: Create ntp container
+  community.general.docker_container:
+     name: ntp
+     image: cloudwattfr/ntpserver:latest
+     container_default_behavior: compatibility
+     state: started
+     privileged: yes
+     restart: yes
+     restart_policy: always
+     ports:
+       - 123:123

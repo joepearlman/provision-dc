@@ -2,10 +2,18 @@
 # main tasks file for docker setup
 
 - name: install docker
-  include: docker-install.yml
+  include: install-docker.yml
   tags: install-docker
 
 - name: Create DNSmasq container
   include: dnsmasq-docker.yml
   tags: dnsmasq
+
+- name: Create NTP container
+  include: ntp-docker.yml
+  tags: ntp
+
+- name: Create LDAP container
+  include: ldap-docker.yml
+  tags: ldap
 

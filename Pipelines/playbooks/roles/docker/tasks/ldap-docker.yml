@@ -1,0 +1,30 @@
+---
+###############################################################################
+# ldap-docker.yml
+#     create the ldap docker container
+#
+###############################################################################
+
+- name: Copy ldap environment file from Template
+  template:
+    src: ldap-env.txt
+    dest: /opt/ldap-env.txt
+
+# Create the LDAP containter with users created above
+# sudo docker run -d --name openldap -p 1389:1389 -p 1636:1636 --env-file ldap_env.txt  --restart always bitnami/openldap:latest
+# test with: ldapsearch -x -b "dc=davis,dc=home" -H ldap://<DC-NAME>:1389
+- name: Create ldap container
+  community.general.docker_container:
+     name: ldap
+     image: bitnami/openldap:latest
+     container_default_behavior: compatibility
+     state: started
+     privileged: yes
+     restart: yes
+     restart_policy: always
+     ports:
+       - 1389:1389
+       - 1636:1636
+     env_file: /opt/ldap-env.txt
+       
+      
