@@ -11,4 +11,11 @@ gateway: "192.168.60.1"      # Gateway to use and Vyos Internal IP
 dns: "192.168.60.9"          # DNS Server for your Internal Network
 global_dns: "8.8.8.8"        # External DNS
 password_common: "VMware1!"  # Password to be shared - feel free to overwrite below
-
+dc_name: "dc-60-9"
+dc_ip: "{{ dns }}"
+vcsa_name: "vcsa"
+vcsa_ip: "192.168.60.10"
+esx1_name: "esx01"
+esx1_ip: "192.168.60.11"
+esx2_name: "esx02"
+esx2_ip: "192.168.60.12"

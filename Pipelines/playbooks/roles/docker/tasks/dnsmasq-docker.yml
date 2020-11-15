@@ -33,6 +33,12 @@
     insertafter: 'nameserver'
     line: nameserver 8.8.8.8
  
+- name: Add search domain to resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: '^search 9'
+    line: search {{ domain }}
+ 
 - name: Copy dnsmasq conf file from Template
   template:
     src: dnsmasq.conf
