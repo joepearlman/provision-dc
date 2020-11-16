@@ -1,0 +1,9 @@
+- name: Deploy vCenter Server Appliance
+  hosts: vcsa
+  gather_facts: false
+  connection: local
+  become: yes
+  vars:
+    debug: False
+  roles:
+    - vcsa

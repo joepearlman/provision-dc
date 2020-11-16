@@ -1,0 +1,70 @@
+#
+#  Copyright 2015 VMware, Inc.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+oob_vcenter_deploy_target_url: "https://192.168.126.99"
+oob_vcenter_deployment_option: "tiny"
+oob_vcenter_admin_password: "Password!23"
+oob_vcenter_ip_gateway: "192.168.68.1" 
+dns_server: "192.168.68.2"
+oob_vcenter_ip_netmask: "255.255.255.0"
+oob_vcenter_ip_address: "192.168.68.200"
+oob_vcenter_embedded_sso_domain_name: "vlab.local"
+oob_vcenter_embedded_sso_site_name: "vcauto"
+oob_vcenter_embedded_sso_password: "Password!23"
+oob_vcenter_esx_portgroup: "Mgmt-vm-Network"
+oob_vcenter_esx_datastore: "PrimaryDatastore"
+oob_vcenter_deploy_target_user_name: "root"
+oob_vcenter_deploy_target_user_password: "Grybro!23"
+dns_domain_name: "vlab.local"
+oob_vcenter_appliance_name: "glenn"
+the_one_task_template: "test"
+the_one_task: "test"
+vcenter_host: "test"
+vcenter_user: "test"
+vcenter_password: "test"
+vcenter_port: "test"
+esx_hostname: "test"
+esx_username: "test"
+esx_password: "test"
+esx_datastore: "test"
+esx_network: "test"
+appliance_thin_disk_mode: "test"
+ip_family: "test"
+time_tools_sync: "test"
+ssh_enable: "test"
+database_type: "test"
+sso_domain_name: "test"
+sso_site_name: "test"
+sso_password: "test"
+psc_appliance_vcenter_name: "test"
+vcsa_appliance_vcenter_name: "test"
+psc_appliance_domain_name: "test"
+vcsa_appliance_domain_name: "test"
+psc_appliance_root_password: "test"
+vcsa_appliance_root_password: "test"
+appliance_deployment_option: "test"
+psc_appliance_ip_address: "test"
+psc_appliance_ip_prefix: "test"
+psc_appliance_ip_gw: "test"
+psc_appliance_dns_servers: "test"
+vcsa_appliance_ip_address: "test"
+vcsa_appliance_ip_prefix: "test"
+vcsa_appliance_ip_gw: "test"
+vcsa_appliance_dns_servers: "test"
+ovftool: "ovftool"
+iso: "test"
+ova: "test"
+mount_dir_path: "test"
+ovftool_http_timeout: "test"

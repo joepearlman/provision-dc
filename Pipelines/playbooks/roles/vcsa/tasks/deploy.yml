@@ -1,0 +1,51 @@
+---
+#
+#  Copyright 2015 VMware, Inc.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+#
+- name: Create a json file from template to deploy an OOB vCenter with embedded PSC
+  template: 
+    src: embedded_vCSA_on_ESXi.json.j2 
+    dest: "{{ role_path }}/files/embedded_vCSA_on_ESXi.json"
+  tags:
+    - create_vcenterpsc_task
+
+- name: Check if appliance already deployed
+  vmware_guest_facts:
+    hostname: "{{ esxi_hostname }}"
+    username: "{{ esxi_username }}"
+    password: "{{ esxi_password }}"
+    datacenter: "{{ item.name }}"
+    name: "{{ appliance_name }}"
+    validate_certs: no
+  loop: "{{ enviro.vmware.datacenter }}"
+  ignore_errors: True
+  register: facts
+
+- debug: 
+    var: facts.results[0]
+  when: debug == True
+
+- set_fact:
+    notDeployed: "{{ facts.results[0].failed }}"
+  
+- debug: 
+    var: notDeployed
+
+- name: Deploy the appliance
+  command: "{{ mount_dir_path }}/{{ vcsaDeployTool }} install --log-dir {{ log_dir }}  --no-esx-ssl-verify --accept-eula --acknowledge-ceip {{ role_path }}/files/embedded_vCSA_on_ESXi.json"
+  when: notDeployed == true
+  tags:
+    - deploy_vcenter_psc_ova

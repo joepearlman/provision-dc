@@ -1,0 +1,76 @@
+#
+#  Copyright 2015 VMware, Inc.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+---
+#- name: Set the FQDN fact when deploying IB PSC
+#  set_fact:
+#      ib_psc_fqdn: "{{ ib_psc_appliance_name }}.{{ dns_domain_name }}"
+#  tags:
+#    - create_ib_psc_task
+#
+#- name: Set the FQDN fact when deploying OOB PSC
+#  set_fact:
+#      oob_psc_fqdn: "{{ oob_psc_appliance_name }}.{{ dns_domain_name }}"
+#  tags:
+#    - create_oob_psc_task
+#
+#- name: Set the FQDN fact when deploying IB vCenter
+#  set_fact:
+#      ib_vcenter_fqdn: "{{ ib_vcenter_appliance_name }}.{{ dns_domain_name }}"
+#  tags:
+#    - create_ib_vcenter_task
+#    - create_ib_vcenterpsc_task
+#
+- name: Set the FQDN fact when deploying OOB vCenter
+  set_fact:
+      oob_vcenter_fqdn: "{{ oob_vcenter_appliance_name }}.{{ dns_domain_name }}"
+  tags:
+    - create_oob_vcenter_task
+    - create_oob_vcenterpsc_task
+
+#- name: Create a task from template to deploy an IB PSC
+#  template: src=ib_psc_ovf_deploy.yml.j2 dest={{ vcsa_task_directory }}/deploy_appliance.yml
+#  tags:
+#    - create_ib_psc_task
+#
+#- name: Create a task from template to deploy an OOB PSC
+#  template: src=oob_psc_ovf_deploy.yml.j2 dest={{ vcsa_task_directory }}/deploy_appliance.yml
+#  tags:
+#    - create_oob_psc_task
+#
+#- name: Create a task from template to deploy an IB vCenter
+#  template: src=ib_vcenter_ovf_deploy.yml.j2 dest={{ vcsa_task_directory }}/deploy_appliance.yml
+#  tags:
+#    - create_ib_vcenter_task
+#
+#- name: Create a task from template to deploy an OOB vCenter
+#  template: src=oob_vcenter_ovf_deploy.yml.j2 dest={{ vcsa_task_directory }}/deploy_appliance.yml
+#  tags:
+#    - create_oob_vcenter_task
+#
+- name: Create a task from template to deploy an OOB vCenter with embedded PSC
+  template: src=oob_vcenterpsc_ovf_deploy.yml.j2 dest={{ vcsa_task_directory }}/deploy_appliance.yml
+  tags:
+    - create_oob_vcenterpsc_task
+#
+#- name: Create a task from template to deploy an IB vCenter with embedded PSC
+#  template: src=ib_vcenterpsc_ovf_deploy.yml.j2 dest={{ vcsa_task_directory }}/deploy_appliance.yml
+#  tags:
+#    - create_ib_vcenterpsc_task
+#
+- name: Deploy the appliance
+  include: deploy_appliance.yml
+  tags:
+    - deploy_vcenter_psc_ova

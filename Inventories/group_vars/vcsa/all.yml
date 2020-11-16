@@ -1,0 +1,64 @@
+# Variables to be used in the vcenter-deploy json file
+VIUsername: "administrator@vlab.local"
+VIPassword: "VMware1!"
+#
+esxi_hostname: "{{ esxi1_name }}.{{ domain }}"
+esxi_username: "root"
+esxi_password: "VMware1!"
+esxi_network: "VM Network"
+esxi_datastore: "datastore1"
+#
+thin_disk: "true"
+deploy_option: "tiny"
+appliance_name: "vcsa"
+#
+network_family: "ipv4"
+network_mode: "static"
+dns_server: "{{ dns }}"
+ntp_server: "{{ ntp }}"
+#
+network_prefix: "24"
+#gateway: "{{ gateway }}" # can't do this
+vcenter_fqdn: "{{ appliance_name }}.{{ domain }}"
+#
+vc_root_passwd: "VMware1!"
+enable_ssh: "true"
+#
+sso_passwd: "VMware1!"
+domain_name: "{{ domain }}"
+vc_hostname: "{{ appliance_name }}"
+#
+enable_ceip: "false"
+#
+chaperone_vcsa_iso: "VMware-VCSA-all-6.7.0-13643870.iso"
+
+appliance_thin_disk_mode: "true"
+ip_family: "ipv4"
+time_tools_sync: "true"
+#ssh_enable: "true"
+database_type: "embedded"
+downloads_site: "http://192.168.60.9"
+downloads_dir: "/mnt/data"
+log_dir: "/tmp"
+vcsa_ova: "vcsa/vmware-vcsa"
+mount_dir_path: "/mnt/data/vcsa-install"
+ovftool: "vcsa/ovftool/lin64/ovftool"
+vcsaDeployTool: "vcsa-cli-installer/lin64/vcsa-deploy"
+ovftool_http_timeout: 25
+esx_datacenter: AEP-Datacenter
+esx_cluster: Cluster
+#vcsa_task_directory: "/home/gdavis/work/AEP/playbooks/roles/vcsa/tasks"
+chaperone_log_directory: "/var/log/chaperone"
+network_ip_scheme: Static
+
+enviro:
+  vmware:
+    folder:    # Region
+      - name: "Region"
+    datacenter:  # Availability Zones:
+      - name: "AZ1"
+        region: "Region"
+    clusters:    # Racks
+      - name: "Cluster"
+        availabilityZone: "AZ1"
+

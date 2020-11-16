@@ -14,7 +14,6 @@
      container_default_behavior: compatibility
      state: started
      privileged: yes
+     network_mode: host
      restart: yes
      restart_policy: always
-     ports:
-       - 123:123

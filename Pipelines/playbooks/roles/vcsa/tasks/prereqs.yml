@@ -1,0 +1,74 @@
+---
+# prereqs.yml
+#
+- name: Install Python VM Library
+  pip:
+    name: pyVim
+
+- name: Install Python VM Library
+  pip:
+    name: PyVmomi
+
+# If the download directory doesn't already exist it is created'
+- name: Create the download directory
+  file: 
+    path: "{{ downloads_dir }}" 
+    state: directory 
+    mode: 0755
+  tags:
+    - prereqs
+
+## Download the file from website
+#- name: Download vcsa iso
+#  get_url:
+#    url: "{{ downloads_site }}/{{ chaperone_vcsa_iso }}"
+#    dest: "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}"
+#    mode: '0775'
+
+# We use a single directory to mount the vCSA ISO and we first need to determine whether the
+#  directory already exists
+- name: Retrieve info about the mount directory
+  stat: 
+    path: "{{ mount_dir_path }}"
+  register: mount_dir_stat_first
+  tags:
+    - prereqs
+
+# If the mount directory doesn't already exist it is created'
+- name: Create the mount directory
+  file: 
+    path: "{{ mount_dir_path }}" 
+    state: directory 
+    mode: 0755
+  when: mount_dir_stat_first.stat.exists == False
+  tags:
+    - prereqs
+
+# We run stat again to get info about the mount directory post-creation. This info will be used
+#  within when statements to make sure that the directory exists and isn't already being used.
+#  It's a crude check and I would like to devise a better method.
+- name: Retrieve info about the mount directory
+  stat: 
+    path: "{{ mount_dir_path }}"
+  register: mount_dir_stat_created
+  tags:
+    - prereqs
+
+# Mount the vCSA ISO to the mount directory WHEN the mount directory is RO. Crude check,
+#  need a more intelligent one.
+- name: Mount the ISO
+  command: /bin/mount -t iso9660 "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}" "{{ mount_dir_path }}"
+  become: True
+  when: mount_dir_stat_created.stat.wusr == True
+  tags:
+    - prereqs
+
+# Run stat for third time to retrieve the metadata on the directory
+- name: Update the info on the mounted directory
+  stat: 
+    path: "{{ mount_dir_path }}"
+  register: mount_dir_stat_mounted
+  failed_when: mount_dir_stat_mounted.stat.wusr != False
+  tags:
+    - prereqs
+

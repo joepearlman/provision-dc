@@ -1,0 +1,49 @@
+---
+# Using the ovftool binary, deploys the required appliance(s)
+# The failed_when property is used to capture both soft failures ("Monitor failed:") and hard
+#  failures (return code > 0)
+- name: Deploy the out-of-band vCenter appliance with embedded PSC
+  command: >
+    ovftool
+    --sourceType=OVA
+    --acceptAllEulas
+    --allowExtraConfig
+    --noSSLVerify
+    --diskMode=thin
+    --skipManifestCheck
+    --X:injectOvfEnv
+    --powerOn
+    --X:httpTimeout=test
+    --X:enableHiddenProperties
+    --X:connectionFileTransferRetryCount=3
+    "--X:monitorInstallFiles=file://root:Grybro!23@/var/log/firstboot/rpmInstall.json, file://root:Grybro!23@/var/log/firstboot/fbInstall.json"
+    --X:monitorOutputFile=/tmp/vcsa-cli-installer-progress-4840342.json
+    --X:logFile=/var/log/chaperone/oob_vcenterpsc_Static.log
+    --X:logLevel=verbose
+    --X:logTransferHeaderData
+    --X:waitForIp
+    --prop:guestinfo.cis.appliance.root.shell=/bin/bash
+    --prop:guestinfo.cis.db.type=embedded
+    --diskMode=thin
+    --datastore='PrimaryDatastore'
+    --network='Mgmt-vm-Network'
+    --prop:guestinfo.cis.vmdir.password='Password!23'
+    --prop:guestinfo.cis.vmdir.site-name='vcauto'
+    --prop:guestinfo.cis.vmdir.domain-name='vlab.local'
+    --prop:guestinfo.cis.appliance.ssh.enabled='test'
+    --prop:guestinfo.cis.appliance.time.tools-sync='test'
+    --prop:guestinfo.cis.appliance.net.addr.family='test'
+    --name='glenn'
+    --prop:guestinfo.cis.appliance.net.pnid='glenn.vlab.local'
+    --prop:guestinfo.cis.appliance.root.passwd='Password!23'
+    --prop:guestinfo.cis.appliance.net.mode=static
+    --prop:guestinfo.cis.appliance.net.addr='192.168.68.200'
+    --prop:guestinfo.cis.appliance.net.prefix='255.255.255.0'
+    --prop:guestinfo.cis.appliance.net.gateway='192.168.68.1'
+    --prop:guestinfo.cis.appliance.net.dns.servers='192.168.68.2'
+    --deploymentOption='tiny'
+    'test/vcsa/vmware-vcsa'
+    vi://'root':Grybro%2123@https://192.168.126.99
+  register: deploy_ovf_cmd_result
+  ignore_errors: True
+  failed_when: "'Monitor failed:' in deploy_ovf_cmd_result.stdout or deploy_ovf_cmd_result.rc > 0"

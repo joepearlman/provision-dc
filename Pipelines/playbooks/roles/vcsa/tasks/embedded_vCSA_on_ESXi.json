@@ -1,0 +1,49 @@
+{
+    "__version": "2.3.0",
+    "__comments": "Sample  template to deploy a vCenter Server Appliance with an embedded Platform Services Controller on an ESXi host.",
+    "new.vcsa": {
+        "esxi": {
+            "hostname": "192.168.126.99",
+            "username": "root",
+            "password": "Password!23",
+            "deployment.network": "Mgmt-vm-Network",
+            "datastore": "PrimaryDatastore"
+        },
+        "appliance": {
+            "thin.disk.mode": true,
+            "deployment.option": "tiny",
+            "name": "vcsa3-HL2"
+        },
+        "network": {
+            "ip.family": "ipv4",
+            "mode": "static",
+            "ip": "192.168.68.19",
+            "dns.servers": [
+                "192.168.68.2"
+            ],
+            "prefix": "24",
+            "gateway": "192.168.68.1",
+            "system.name": "vcsa2.vlab.local"
+        },
+        "os": {
+            "password": "Password!23",
+            "ssh.enable": true
+        },
+        "sso": {
+            "password": "Password!23",
+            "domain-name": "vlab.local",
+            "site-name": "vcsa2"
+        }
+    },
+    "ceip": {
+        "description": {
+            "__comments": [
+                "++++VMware Customer Experience Improvement Program (CEIP)++++",
+                "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            ]
+        },
+        "settings": {
+            "ceip.enabled": false
+        }
+    }
+}

@@ -41,7 +41,7 @@
  
 - name: Copy dnsmasq conf file from Template
   template:
-    src: dnsmasq.conf
+    src: dnsmasq.conf.j2
     dest: /opt/dnsmasq.conf
 
 # Create the DNSmasq containter with port 8080 used for the webserver to modify values

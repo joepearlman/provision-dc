@@ -1,0 +1,53 @@
+{
+    "__version": "2.3.0",
+    "__comments": "Sample  template to deploy a vCenter Server Appliance with an embedded Platform Services Controller on an ESXi host.",
+    "new.vcsa": {
+        "esxi": {
+            "hostname": "{{ esxi_hostname }}",
+            "username": "{{ esxi_username }}",
+            "password": "{{ esxi_password }}",
+            "deployment.network": "{{ esxi_network }}",
+            "datastore": "{{ esxi_datastore }}"
+        },
+        "appliance": {
+            "thin.disk.mode": {{ thin_disk }},
+            "deployment.option": "{{ deploy_option }}",
+            "name": "{{ appliance_name }}"
+        },
+        "network": {
+            "ip.family": "{{ network_family }}",
+            "mode": "{{ network_mode }}",
+            "ip": "{{ inventory_hostname }}",
+            "dns.servers": [
+                "{{ dns_server }}"
+            ],
+            "prefix": "{{ network_prefix }}",
+            "gateway": "{{ gateway }}",
+            "system.name": "{{ inventory_hostname }}"
+        },
+        "os": {
+            "password": "{{ vc_root_passwd }}",
+            "ssh.enable": {{ enable_ssh }},
+            "ntp_servers": [
+               "{{ ntp_server }}"
+            ]
+ 
+        },
+        "sso": {
+            "password": "{{ sso_passwd }}",
+            "domain-name": "{{ domain_name }}",
+            "site-name": "{{ vc_hostname }}"
+        }
+    },
+    "ceip": {
+        "description": {
+            "__comments": [
+                "++++VMware Customer Experience Improvement Program (CEIP)++++",
+                "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            ]
+        },
+        "settings": {
+            "ceip.enabled": {{ enable_ceip }}
+        }
+    }
+}

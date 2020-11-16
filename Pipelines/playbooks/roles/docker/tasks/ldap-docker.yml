@@ -7,7 +7,7 @@
 
 - name: Copy ldap environment file from Template
   template:
-    src: ldap-env.txt
+    src: ldap-env.txt.j2
     dest: /opt/ldap-env.txt
 
 # Create the LDAP containter with users created above
