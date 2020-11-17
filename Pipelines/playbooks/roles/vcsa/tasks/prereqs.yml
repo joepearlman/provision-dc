@@ -18,12 +18,12 @@
   tags:
     - prereqs
 
-## Download the file from website
-#- name: Download vcsa iso
-#  get_url:
-#    url: "{{ downloads_site }}/{{ chaperone_vcsa_iso }}"
-#    dest: "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}"
-#    mode: '0775'
+# Copy the file from the tmp directory
+- name: Download vcsa iso
+  copy:
+    src: "/tmp/{{ chaperone_vcsa_iso }}"
+    dest: "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}"
+    mode: '0775'
 
 # We use a single directory to mount the vCSA ISO and we first need to determine whether the
 #  directory already exists
