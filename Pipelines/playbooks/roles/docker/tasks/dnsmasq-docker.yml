@@ -21,23 +21,36 @@
   tags:
     - dnsmasq
 
-- name: Replace line in resolv.conf since internal DNS is disabled
-  lineinfile:
+- name: Remove the link from resolv.conf to the systemd-resolved
+  file:
     path: /etc/resolv.conf
-    regexp: '^nameserver 127\.0\.0\.53'
-    line: nameserver 127.0.0.1
-  
-- name: Add additional 8.8.8.8 to resolv.conf
-  lineinfile:
-    path: /etc/resolv.conf
-    insertafter: 'nameserver'
-    line: nameserver 8.8.8.8
- 
-- name: Add search domain to resolv.conf
-  lineinfile:
-    path: /etc/resolv.conf
-    regexp: '^search 9'
-    line: search {{ domain }}
+    state: absent
+
+- name: Creating a file with content
+  copy:
+    dest: "/etc/resolv.conf"
+    content: |
+      nameserver 127.0.0.1
+      nameserver 8.8.8.8
+      search {{ domain }}
+
+#- name: Replace line in resolv.conf since internal DNS is disabled
+#  lineinfile:
+#    path: /etc/resolv.conf
+#    regexp: '^nameserver 127\.0\.0\.53'
+#    line: nameserver 127.0.0.1
+#  
+#- name: Add additional 8.8.8.8 to resolv.conf
+#  lineinfile:
+#    path: /etc/resolv.conf
+#    insertafter: 'nameserver'
+#    line: nameserver 8.8.8.8
+# 
+#- name: Add search domain to resolv.conf
+#  lineinfile:
+#    path: /etc/resolv.conf
+#    regexp: '^search 9'
+#    line: search {{ domain }}
  
 - name: Copy dnsmasq conf file from Template
   template:
