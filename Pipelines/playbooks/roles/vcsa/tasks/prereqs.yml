@@ -18,8 +18,8 @@
   tags:
     - prereqs
 
-# Copy the file from the tmp directory
-- name: Copy the vcsa iso from /opt
+# Copy the file from the /var/tmp directory (it persists)
+- name: Copy the vcsa iso from /var/tmp
   copy:
     src: "/opt/{{ chaperone_vcsa_iso }}"
     dest: "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}"
