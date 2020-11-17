@@ -19,9 +19,9 @@
     - prereqs
 
 # Copy the file from the tmp directory
-- name: Download vcsa iso
+- name: Copy the vcsa iso from /opt
   copy:
-    src: "/tmp/{{ chaperone_vcsa_iso }}"
+    src: "/opt/{{ chaperone_vcsa_iso }}"
     dest: "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}"
     mode: '0775'
 
