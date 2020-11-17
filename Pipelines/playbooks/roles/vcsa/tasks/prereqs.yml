@@ -18,12 +18,12 @@
   tags:
     - prereqs
 
-# Copy the file from the /var/tmp directory (it persists)
-- name: Copy the vcsa iso from /var/tmp
-  copy:
-    src: "/opt/{{ chaperone_vcsa_iso }}"
-    dest: "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}"
-    mode: '0775'
+## Copy the file from the /var/tmp directory (it persists)
+#- name: Copy the vcsa iso from /var/tmp
+#  copy:
+#    src: "/var/tmp/{{ chaperone_vcsa_iso }}"
+#    dest: "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}"
+#    mode: '0775'
 
 # We use a single directory to mount the vCSA ISO and we first need to determine whether the
 #  directory already exists
@@ -57,7 +57,7 @@
 # Mount the vCSA ISO to the mount directory WHEN the mount directory is RO. Crude check,
 #  need a more intelligent one.
 - name: Mount the ISO
-  command: /bin/mount -t iso9660 "{{ downloads_dir }}/{{ chaperone_vcsa_iso }}" "{{ mount_dir_path }}"
+  command: /bin/mount -t iso9660 "/var/tmp/{{ chaperone_vcsa_iso }}" "{{ mount_dir_path }}"
   become: True
   when: mount_dir_stat_created.stat.wusr == True
   tags:

@@ -17,3 +17,8 @@
   include: ldap-docker.yml
   tags: ldap
 
+# After everything is complete sleep for a few seconds for the system to sync to drive
+# this is just in case there is a reboot right after
+- name: Pause for 5 seconds to build app cache
+  pause:
+    seconds: 5
