@@ -23,23 +23,27 @@
     - create_vcenterpsc_task
 
 - name: Check if appliance already deployed
-  vmware_guest_facts:
+  vmware_guest_info:
     hostname: "{{ esxi_hostname }}"
     username: "{{ esxi_username }}"
     password: "{{ esxi_password }}"
-    datacenter: "{{ item.name }}"
+    datacenter: "none"
     name: "{{ appliance_name }}"
     validate_certs: no
-  loop: "{{ enviro.vmware.datacenter }}"
-  ignore_errors: True
   register: facts
+  changed_when: 
+    - facts.msg is defined
+    - "'Unable to gather information for non-existing VM' in facts.msg" 
+  failed_when: 
+    - facts.msg is defined
+    - "'Unable to gather information for non-existing VM' not in facts.msg" 
 
 - debug: 
-    var: facts.results[0]
-  when: debug == True
+    var: facts
+  when: debug  >= 0
 
 - set_fact:
-    notDeployed: "{{ facts.results[0].failed }}"
+    notDeployed: "{{ facts.changed }}"
   
 - debug: 
     var: notDeployed

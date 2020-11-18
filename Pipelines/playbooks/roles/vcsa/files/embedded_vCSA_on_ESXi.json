@@ -3,7 +3,7 @@
     "__comments": "Sample  template to deploy a vCenter Server Appliance with an embedded Platform Services Controller on an ESXi host.",
     "new.vcsa": {
         "esxi": {
-            "hostname": "esx01.davis.home",
+            "hostname": "esxi01.davis.home",
             "username": "root",
             "password": "VMware1!",
             "deployment.network": "VM Network",

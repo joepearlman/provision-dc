@@ -19,7 +19,7 @@
             "mode": "{{ network_mode }}",
             "ip": "{{ inventory_hostname }}",
             "dns.servers": [
-                "{{ dns_server }}"
+                "{{ dns }}"
             ],
             "prefix": "{{ network_prefix }}",
             "gateway": "{{ gateway }}",
@@ -29,13 +29,13 @@
             "password": "{{ vc_root_passwd }}",
             "ssh.enable": {{ enable_ssh }},
             "ntp_servers": [
-               "{{ ntp_server }}"
+               "{{ ntp }}"
             ]
  
         },
         "sso": {
             "password": "{{ sso_passwd }}",
-            "domain-name": "{{ domain_name }}",
+            "domain-name": "{{ domain }}",
             "site-name": "{{ vc_hostname }}"
         }
     },
