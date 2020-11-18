@@ -16,9 +16,9 @@ dc_name: "dc-60-9"
 dc_ip: "{{ dns }}"
 vcsa_name: "vcsa"
 vcsa_ip: "192.168.60.10"
-esxi1_name: "esx01"
+esxi1_name: "esxi01"
 esxi1_ip: "192.168.60.11"
-esxi2_name: "esx02"
+esxi2_name: "esxi02"
 esxi2_ip: "192.168.60.12"
 
 #LDAP Variables
