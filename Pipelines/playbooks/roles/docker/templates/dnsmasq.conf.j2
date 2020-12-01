@@ -18,10 +18,10 @@ strict-order
 #serve all {{ domain }} queries using a specific nameserver
 server=/{{ domain }}/127.0.0.1
 #explicitly define host-ip mappings
-address=/dc1.davis.home/{{ dns }}
-address=/ns1.davis.home/{{ dns }}
-address=/ntp.davis.home/{{ dns }}
-address=/{{ dc_name }}.davis.home/{{ dc_ip }}
-address=/{{ esxi1_name }}.davis.home/{{ esxi1_ip }}
-address=/{{ esxi2_name }}.davis.home/{{ esxi2_ip }}
-address=/{{ vcsa_name }}.davis.home/{{ vcsa_ip }}
+address=/dc1.{{ domain }}/{{ dns }}
+address=/ns1.{{ domain }}/{{ dns }}
+address=/ntp.{{ domain }}/{{ dns }}
+address=/{{ dc_name }}.{{ domain }}/{{ dc_ip }}
+address=/{{ esxi1_name }}.{{ domain }}/{{ esxi1_ip }}
+address=/{{ esxi2_name }}.{{ domain }}/{{ esxi2_ip }}
+address=/{{ vcsa_name }}.{{ domain }}/{{ vcsa_ip }}
