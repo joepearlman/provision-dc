@@ -3,9 +3,9 @@
     "__comments": "Sample  template to deploy a vCenter Server Appliance with an embedded Platform Services Controller on an ESXi host.",
     "new.vcsa": {
         "esxi": {
-            "hostname": "esxi01.davis.home",
+            "hostname": "AB-esxi01.grybro.com",
             "username": "root",
-            "password": "VMware1!",
+            "password": "1Killer!23",
             "deployment.network": "VM Network",
             "datastore": "datastore1"
         },
@@ -17,25 +17,25 @@
         "network": {
             "ip.family": "ipv4",
             "mode": "static",
-            "ip": "192.168.60.10",
+            "ip": "192.168.65.10",
             "dns.servers": [
-                "192.168.60.9"
+                "192.168.65.9"
             ],
             "prefix": "24",
-            "gateway": "192.168.60.1",
-            "system.name": "192.168.60.10"
+            "gateway": "192.168.65.1",
+            "system.name": "192.168.65.10"
         },
         "os": {
-            "password": "VMware1!",
+            "password": "1Killer!23",
             "ssh.enable": true,
             "ntp_servers": [
-               "192.168.60.9"
+               "192.168.65.9"
             ]
  
         },
         "sso": {
-            "password": "VMware1!",
-            "domain-name": "davis.home",
+            "password": "1Killer!23",
+            "domain-name": "grybro.com",
             "site-name": "vcsa"
         }
     },

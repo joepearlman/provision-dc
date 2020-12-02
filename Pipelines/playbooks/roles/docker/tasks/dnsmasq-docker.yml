@@ -74,5 +74,5 @@
      volumes:
        - /opt/dnsmasq.conf:/etc/dnsmasq.conf
      env:
-       HTTP_USER: "admin"
-       HTTP_PASS: "VMware1!"
+       HTTP_USER: "{{ myuser }}"
+       HTTP_PASS: "{{ password_common }}"
