@@ -17,6 +17,10 @@
   include: ldap-docker.yml
   tags: ldap
 
+- name: Create Nexus container
+  include: nexus-docker.yml
+  tags: nexus
+
 # After everything is complete sleep for a few seconds for the system to sync to drive
 # this is just in case there is a reboot right after
 #- name: Pause for 5 seconds to build app cache
