@@ -1,12 +1,9 @@
 ---
 - name: Install and Configure Docker Containers for Domain Controller
   hosts: cicd
-  gather_facts: false
+  gather_facts: true
   connection: local
   become: yes
   roles: 
-  - docker
-#  - dnsmasq
-#  - ntp
-#  - ldap
-#  - cacert
+  - ansible-thoteam.nexus3-oss
+
