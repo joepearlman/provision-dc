@@ -20,3 +20,10 @@
 
 - name: Run a command to get password in Nexus3
   ansible.builtin.shell: docker container exec nexus3 cat nexus-data/admin.password
+
+# - name: Go Into Docker Container and run command to show password
+#   docker:
+#      name: nexus3
+#      image: sonatype/nexus3:latest
+#      state: present
+#      command: docker container exec nexus3 cat nexus-data/admin.password
