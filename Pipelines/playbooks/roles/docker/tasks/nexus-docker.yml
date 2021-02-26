@@ -17,3 +17,6 @@
      network_mode: host
      restart: yes
      restart_policy: always
+
+- name: Run a command to get password in Nexus3
+  ansible.builtin.shell: docker container exec nexus3 cat nexus-data/admin.password
